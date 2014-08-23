@@ -1,9 +1,18 @@
 <h1>Leaderboard</h1>
 
 <table>
-
-
-
+<tr>
+  <th>Team</th>
+  <th>Wins</th>
+  <th>Loses</th>
+</tr>
+<% records.each do |team, record| %>
+<tr>
+  <td><a href="/teams/<%= team %>"><%= team %></a></td>
+  <td><%= record[0] %></td>
+  <td><%= record[1] %></td>
+</tr>
+<% end %>
 </table>
 
 

@@ -65,14 +65,25 @@ def get_record(league, team)
   record
 end
 
-binding.pry
+def get_records(teams, results)
+  records = {}
+    teams.each do |team|
+      records[team] = get_record(results, team)
+    end
+  records
+end
+
+teams = get_teams(results)
+
 get '/' do
   teams = get_teams(results)
   erb :index, locals: {teams: teams}
 end
 
 get '/leaderboard' do
-  erb :leaderboard
+  records = get_records(teams, results)
+
+  erb :leaderboard, locals: {records: records}
 end
 
 get '/teams' do
@@ -81,8 +92,9 @@ end
 
 get '/teams/:team' do
   team = params[:team]
+  record = get_record(results, params[:team])
 
-  erb :'teams/team', locals: {team: team}
+  erb :'teams/team', locals: {team: team, record: record}
 end
 
 
