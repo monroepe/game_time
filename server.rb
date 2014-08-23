@@ -41,6 +41,31 @@ def get_teams(league)
    teams
 end
 
+def get_record(league, team)
+  wins = 0
+  loses = 0
+  record = []
+  league.each do |game|
+    if game[:home_team] == team
+      if game[:home_score] > game[:away_score]
+        wins += 1
+      else
+        loses += 1
+      end
+    elsif game[:away_team] == team
+      if game[:away_score] > game[:home_score]
+        wins += 1
+      else
+        loses += 1
+      end
+    end
+  end
+  record << wins
+  record << loses
+  record
+end
+
+binding.pry
 get '/' do
   teams = get_teams(results)
   erb :index, locals: {teams: teams}
