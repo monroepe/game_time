@@ -2,7 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'pry'
 
-@results = [
+results = [
   {
     home_team: "Patriots",
     away_team: "Broncos",
@@ -29,9 +29,9 @@ require 'pry'
   }
 ]
 
-def get_teams
+def get_teams(league)
   teams = []
-  @results.each do |game|
+  league.each do |game|
     if !teams.include?(game[:home_team])
       teams << game[:home_team]
     elsif !teams.include?(game[:away_team])
@@ -41,9 +41,8 @@ def get_teams
    teams
 end
 
-binding.pry
 get '/' do
-  teams = get_teams
+  teams = get_teams(results)
   erb :index, locals: {teams: teams}
 end
 
@@ -51,16 +50,14 @@ get '/leaderboard' do
   erb :leaderboard
 end
 
-get '/leaderboard/:team' do
-
-end
-
 get '/teams' do
   erb :teams
 end
 
 get '/teams/:team' do
+  team = params[:team]
 
+  erb :'teams/team', locals: {team: team}
 end
 
 
