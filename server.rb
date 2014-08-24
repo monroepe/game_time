@@ -43,26 +43,27 @@ end
 
 def get_record(league, team)
   wins = 0
-  loses = 0
+  losses = 0
   record = []
   league.each do |game|
     if game[:home_team] == team
       if game[:home_score] > game[:away_score]
         wins += 1
       else
-        loses += 1
+        losses += 1
       end
     elsif game[:away_team] == team
       if game[:away_score] > game[:home_score]
         wins += 1
       else
-        loses += 1
+        losses += 1
       end
     end
   end
+  win_percentage = wins/(wins + losses).to_f
   record << wins
-  record << loses
-  record
+  record << losses
+  record << win_percentage
 end
 
 def get_records(teams, results)
@@ -70,7 +71,8 @@ def get_records(teams, results)
     teams.each do |team|
       records[team] = get_record(results, team)
     end
-  records
+  records=records.sort_by{|team, record| -record[0]}
+  records.sort_by{|team, record| record[1]}
 end
 
 def get_scores(team, league)
