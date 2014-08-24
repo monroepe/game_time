@@ -1,0 +1,22 @@
+body {
+  background-color: gray;
+
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 25%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th {
+    height: 20px;
+}
+
+td {
+    text-align: center;
+}

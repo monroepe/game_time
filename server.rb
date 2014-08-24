@@ -73,15 +73,33 @@ def get_records(teams, results)
   records
 end
 
+def get_scores(team, league)
+  results = []
+  league.each do |game|
+    if game[:home_team] == team
+      results << {opponent: game[:away_team],
+      opponent_score: game[:away_score],
+      team_score: game[:home_score]}
+    elsif game[:away_team] == team
+      results << {opponent: game[:home_team],
+      opponent_score: game[:home_score],
+      team_score: game[:away_score]}
+    end
+  end
+  results
+end
+
 teams = get_teams(results)
+records = get_records(teams, results)
+
 
 get '/' do
-  teams = get_teams(results)
+  #teams = get_teams(results)
   erb :index, locals: {teams: teams}
 end
 
 get '/leaderboard' do
-  records = get_records(teams, results)
+  #records = get_records(teams, results)
 
   erb :leaderboard, locals: {records: records}
 end
@@ -93,8 +111,9 @@ end
 get '/teams/:team' do
   team = params[:team]
   record = get_record(results, params[:team])
+  scores = get_scores(params[:team], results)
 
-  erb :'teams/team', locals: {team: team, record: record}
+  erb :'teams/team', locals: {team: team, record: record, scores: scores}
 end
 
 
