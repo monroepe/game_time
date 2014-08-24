@@ -108,7 +108,7 @@ get '/teams' do
   erb :teams
 end
 
-get '/teams/:team' do
+get '/:team' do
   team = params[:team]
   record = get_record(results, params[:team])
   scores = get_scores(params[:team], results)

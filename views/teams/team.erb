@@ -1,5 +1,7 @@
+<body class = "<%= team %>">
 <h1><%= team %></h1>
 
+<h2>Record</h2>
 <table>
   <tr>
     <th>Team</th>
@@ -19,12 +21,12 @@
 <table>
   <tr>
     <th>Opponent</th>
-    <th><%= team %> Score</th>
-    <th>Opponent Score</th>
+    <th><%= team %></th>
+    <th>Opponent</th>
   </tr>
   <% scores.each do |game| %>
   <tr>
-    <td class = "team"><%= game[:opponent] %></td>
+    <td><a href = "/<%= game[:opponent] %>" class = "team"><%= game[:opponent] %></a></td>
     <td><%= game[:team_score] %></td>
     <td><%= game[:opponent_score] %></td>
   </tr>
@@ -33,4 +35,6 @@
 
 
 <br>
-<a href="/">Back to Homepage</a>
+<a href="/" class = "back_button">Back to Homepage</a>
+
+</body>

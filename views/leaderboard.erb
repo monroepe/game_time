@@ -1,4 +1,4 @@
-<h1>Leaderboard</h1>
+<h3>Leaderboard</h3>
 
 <table>
 <tr>
@@ -8,7 +8,7 @@
 </tr>
 <% records.each do |team, record| %>
 <tr>
-  <td><a href="/teams/<%= team %>"><%= team %></a></td>
+  <td><a href="/<%= team %>" class = "team"><%= team %></a></td>
   <td><%= record[0] %></td>
   <td><%= record[1] %></td>
 </tr>
@@ -17,4 +17,4 @@
 
 
 <br>
-<a href="/">Back to Homepage</a>
+<a href="/" class = "back_button">Back to Homepage</a>
